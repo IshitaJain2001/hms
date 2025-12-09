@@ -19,11 +19,11 @@ export default function AppointmentForm() {
     reason: "",
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); // doctor available nhi h
 
   const handlePatientChange = (e) => {
-    const patientId = e.target.value;
-    const patient = patients.find((p) => p.id.toString() === patientId);
+    const patientId = Number(e.target.value);
+    const patient = patients.find((p) => p.id === patientId);
     setForm({
       ...form,
       patientId,
@@ -32,8 +32,8 @@ export default function AppointmentForm() {
   };
 
   const handleDoctorChange = (e) => {
-    const doctorId = e.target.value;
-    const doctor = doctors.find((d) => d.id.toString() === doctorId);
+    const doctorId = Number(e.target.value);
+    const doctor = doctors.find((d) => d.id === doctorId);
     setForm({
       ...form,
       doctorId,
@@ -48,6 +48,12 @@ export default function AppointmentForm() {
                apt.date === form.date && 
                apt.time === form.time
     );
+  };
+
+  const isDoctorAvailable = () => {
+    const doctor = doctors.find((d) => d.id === form.doctorId);
+    if (!doctor) return false;
+    return form.time >= doctor.startTime && form.time <= doctor.endTime;
   };
 
   const handleSubmit = (e) => {
@@ -65,6 +71,12 @@ export default function AppointmentForm() {
 
     if (!form.date || !form.time) {
       setError("Please select date and time");
+      return;
+    }
+
+    if (!isDoctorAvailable()) {
+      const doctor = doctors.find((d) => d.id === form.doctorId);
+      setError(`Dr. ${doctor.name} is only available between ${doctor.startTime} - ${doctor.endTime}`);
       return;
     }
 

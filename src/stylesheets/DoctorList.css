@@ -1,3 +1,9 @@
+.doctor-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .doctor-list {
   padding: 20px;
   background-color: #f5f5f5;
@@ -34,15 +40,38 @@
   background-color: #f9f9f9;
 }
 
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.doctor-list .view-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.doctor-list .view-btn:hover {
+  background-color: #138496;
+}
+
 .doctor-list .delete-btn {
   background-color: #dc3545;
   color: white;
   border: none;
-  padding: 6px 12px;
+  padding: 6px 10px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   transition: background-color 0.3s;
+  white-space: nowrap;
 }
 
 .doctor-list .delete-btn:hover {
@@ -64,4 +93,8 @@
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
+}
+
+.doctor-appointments {
+  margin-top: 20px;
 }

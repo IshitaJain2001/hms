@@ -10,10 +10,18 @@ export default function DoctorForm() {
     specialty: "",
     phone: "",
     email: "",
+    startTime: "09:00",
+    endTime: "17:00",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (form.startTime >= form.endTime) {
+      alert("End time must be after start time");
+      return;
+    }
+
     dispatch({
       type: ADD_DOCTOR,
       payload: { id: Date.now(), ...form },
@@ -23,6 +31,8 @@ export default function DoctorForm() {
       specialty: "",
       phone: "",
       email: "",
+      startTime: "09:00",
+      endTime: "17:00",
     });
     alert("Doctor added successfully!");
   };
@@ -77,6 +87,26 @@ export default function DoctorForm() {
           placeholder="Email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Working Hours Start</label>
+        <input
+          type="time"
+          value={form.startTime}
+          onChange={(e) => setForm({ ...form, startTime: e.target.value })}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Working Hours End</label>
+        <input
+          type="time"
+          value={form.endTime}
+          onChange={(e) => setForm({ ...form, endTime: e.target.value })}
           required
         />
       </div>
