@@ -4,7 +4,10 @@ import AppointmentForm from "./AppointmentForm";
 import AppointmentList from "./AppointmentList";
 import DoctorForm from "./DoctorForm";
 import DoctorList from "./DoctorList";
-import Billing from "./Billing";
+import MedicineForm from "./MedicineForm";
+import MedicineList from "./MedicineList";
+import MedicineShop from "./MedicineShop";
+import PurchaseHistory from "./PurchaseHistory";
 import Inventory from "./Inventory";
 
 export default function Dashboard({ activeModule }) {
@@ -33,18 +36,27 @@ export default function Dashboard({ activeModule }) {
      );
     }
 
-    if (activeModule === "billing") {
-    return (
-      <div className="dashboard">
-  <Billing/>
-      </div>
-    );
-  }
-else{
-     return (
-      <div className="dashboard">
-        <Inventory/>
-        </div>
-    );
-}
+    if (activeModule === "inventory") {
+      return (
+       <div className="dashboard">
+         <MedicineForm/>
+         <MedicineList/>
+         </div>
+     );
+    }
+    if (activeModule === "medicine-shop") {
+      return (
+       <div className="dashboard">
+         <MedicineShop/>
+         </div>
+     );
+    }
+    if (activeModule === "purchase-history") {
+      return (
+       <div className="dashboard">
+         <PurchaseHistory/>
+         </div>
+     );
+    }
+   
 }

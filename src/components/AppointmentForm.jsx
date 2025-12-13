@@ -19,7 +19,7 @@ export default function AppointmentForm() {
     reason: "",
   });
 
-  const [error, setError] = useState(""); // doctor available nhi h
+  const [error, setError] = useState("");
 
   const handlePatientChange = (e) => {
     const patientId = Number(e.target.value);

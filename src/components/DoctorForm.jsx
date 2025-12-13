@@ -12,6 +12,7 @@ export default function DoctorForm() {
     email: "",
     startTime: "09:00",
     endTime: "17:00",
+    fee: "",
   });
 
   const handleSubmit = (e) => {
@@ -33,6 +34,7 @@ export default function DoctorForm() {
       email: "",
       startTime: "09:00",
       endTime: "17:00",
+      fee: "",
     });
     alert("Doctor added successfully!");
   };
@@ -108,6 +110,18 @@ export default function DoctorForm() {
           value={form.endTime}
           onChange={(e) => setForm({ ...form, endTime: e.target.value })}
           required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Consultation Fee (₹)</label>
+        <input
+          type="number"
+          placeholder="Consultation Fee"
+          value={form.fee}
+          onChange={(e) => setForm({ ...form, fee: Number(e.target.value) })}
+          required
+          min="0"
         />
       </div>
 

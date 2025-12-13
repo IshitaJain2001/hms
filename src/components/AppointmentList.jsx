@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DELETE_APPOINTMENT } from "../Redux/Constants";
+import BillGeneration from "./BillGeneration";
 import "../stylesheets/AppointmentList.css";
 
 export default function AppointmentList({ doctorFilter = null }) {
@@ -9,6 +10,7 @@ export default function AppointmentList({ doctorFilter = null }) {
   const patients = useSelector((state) => state.patients);
   const doctors = useSelector((state) => state.doctors);
   const [cancelConfirm, setCancelConfirm] = useState(null);
+  const [billAppointment, setBillAppointment] = useState(null);
 
   const filteredAppointments = doctorFilter
     ? appointments.filter((apt) => apt.doctorId === doctorFilter)
@@ -96,17 +98,36 @@ export default function AppointmentList({ doctorFilter = null }) {
                     </button>
                   </div>
                 ) : (
-                  <button
-                    className="btn-delete"
-                    onClick={() => setCancelConfirm(apt.id)}
-                  >
-                    Cancel Appointment
-                  </button>
+                  <div className="action-buttons">
+                    {!apt.visited ? (
+                      <button
+                        className="btn-generate-bill"
+                        onClick={() => setBillAppointment(apt)}
+                      >
+                        Generate Bill
+                      </button>
+                    ) : (
+                      <span className="visited-badge">✓ Visited</span>
+                    )}
+                    <button
+                      className="btn-delete"
+                      onClick={() => setCancelConfirm(apt.id)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
           ))}
         </div>
+      )}
+      
+      {billAppointment && (
+        <BillGeneration
+          appointment={billAppointment}
+          onClose={() => setBillAppointment(null)}
+        />
       )}
     </div>
   );
