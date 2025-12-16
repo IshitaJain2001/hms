@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
-import DebugPanel from './components/DebugPanel'
+
 import "./stylesheets/App.css"
 export default function App() {
   const [activeModule, setActiveModule] = useState("patients")
@@ -17,7 +17,7 @@ export default function App() {
        <Dashboard activeModule={activeModule}/>
        </div>
        </div>
-       <DebugPanel />
+      
     </div>
   )
 }
